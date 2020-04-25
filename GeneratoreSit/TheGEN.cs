@@ -155,6 +155,7 @@ namespace GeneratoreSit
                 "</body>",
                 "</html>",
                 "<script type=\"text/javascript\">",
+                "//https://sweetalert.js.org/guides/",
                 "    $(document).ready(function () {",
                 "       $(\"#danger\").click(function () {",
                 "          swal("+ alert +",\"error\");",
