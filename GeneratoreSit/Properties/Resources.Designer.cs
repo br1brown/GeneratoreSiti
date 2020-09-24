@@ -19,7 +19,7 @@ namespace GeneratoreSit.Properties {
     // tramite uno strumento quale ResGen o Visual Studio.
     // Per aggiungere o rimuovere un membro, modificare il file con estensione ResX ed eseguire nuovamente ResGen
     // con l'opzione /str oppure ricompilare il progetto VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,49 +57,6 @@ namespace GeneratoreSit.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una stringa localizzata simile a body.stop-scrolling {
-        ///  height: 100%;
-        ///  overflow: hidden; }
-        ///
-        ///.sweet-overlay {
-        ///  background-color: black;
-        ///  /* IE8 */
-        ///  -ms-filter: &quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=40)&quot;;
-        ///  /* IE8 */
-        ///  background-color: rgba(0, 0, 0, 0.4);
-        ///  position: fixed;
-        ///  left: 0;
-        ///  right: 0;
-        ///  top: 0;
-        ///  bottom: 0;
-        ///  display: none;
-        ///  z-index: 10000; }
-        ///
-        ///.sweet-alert {
-        ///  background-color: white;
-        ///  font-family: &apos;Open Sans&apos;, &apos;Helvetica Neue&apos;, Helvetica, Arial, sans-serif;
-        ///  width: 478px;
-        ///  padding: 17px [stringa troncata]&quot;;.
-        /// </summary>
-        internal static string sweetalert {
-            get {
-                return ResourceManager.GetString("sweetalert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una stringa localizzata simile a ;(function(window, document, undefined) {
-        ///  &quot;use strict&quot;;
-        ///  
-        ///  (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==&quot;function&quot;&amp;&amp;require;if(!u&amp;&amp;a)return a(o,!0);if(i)return i(o,!0);var f=new Error(&quot;Cannot find module &apos;&quot;+o+&quot;&apos;&quot;);throw f.code=&quot;MODULE_NOT_FOUND&quot;,f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==&quot;function&quot;&amp;&amp;require;for(var o=0;o&lt;r.length;o++)s(r[o]);return s})({1: [stringa troncata]&quot;;.
-        /// </summary>
-        internal static string sweetalert_dev {
-            get {
-                return ResourceManager.GetString("sweetalert_dev", resourceCulture);
             }
         }
         

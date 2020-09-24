@@ -100,12 +100,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sweetalert.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\sweetalert-dev.js" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\txt.txt" />
   </ItemGroup>
   <ItemGroup>

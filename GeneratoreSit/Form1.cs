@@ -113,12 +113,10 @@ namespace GeneratoreSit
             var g = new TheGEN(txtName, txtPath);
             g.Author = user;
             backgroundWorker1.ReportProgress(1);
-            g.CREATEsweetalert();
             backgroundWorker1.ReportProgress(2);
-            g.CREATEsweetalertJS();
-            backgroundWorker1.ReportProgress(3);
             g.CREATEcss(R, G, B, A, Nfont);
             backgroundWorker1.ReportProgress(4);
+            backgroundWorker1.ReportProgress(3);
             string str = null;
             if (!string.IsNullOrEmpty(content.Trim()))
                 str = content;

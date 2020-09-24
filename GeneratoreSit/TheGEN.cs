@@ -118,9 +118,10 @@ namespace GeneratoreSit
                 "    <script src=\"https://code.jquery.com/jquery-1.12.4.js\"></script>",
                 "    <script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>",
                 "    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>",
+                "	<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>",
+                "	<!-- Optional: include a polyfill for ES6 Promises for IE11 -->",
+                "	<script src=\"https://cdn.jsdelivr.net/npm/promise-polyfill\"></script>",
 
-                "    <script src=\"Style/sweetalert-dev.js\"></script>",
-                "    <link rel=\"stylesheet\" href=\"Style/sweetalert.css\">",
                 "	<link rel=\"stylesheet\" href=\"Style/css.css\">",
 
                 "    <style>",
@@ -155,22 +156,27 @@ namespace GeneratoreSit
                 "</body>",
                 "</html>",
                 "<script type=\"text/javascript\">",
-                "//https://sweetalert.js.org/guides/",
+                "//https://sweetalert2.github.io/",
                 "    $(document).ready(function () {",
                 "       $(\"#danger\").click(function () {",
-                "          swal("+ alert +",\"error\");",
+                "          $(this).blur();",
+                "          swal.fire(" + alert +",\"error\");",
                 "       });",
                 "       $(\"#info\").click(function () {",
-                "          swal("+ alert +",\"info\");",
+                "          $(this).blur();",
+                "          swal.fire("+ alert +",\"info\");",
                 "       });",
                 "       $(\"#warning\").click(function () {",
-                "          swal("+ alert +",\"warning\");",
+                "          $(this).blur();",
+                "          swal.fire("+ alert +",\"warning\");",
                 "       });",
                 "       $(\"#success\").click(function () {",
-                "          swal("+ alert +",\"success\");",
+                "          $(this).blur();",
+                "          swal.fire("+ alert +",\"success\");",
                 "       });",
                 "       $(\"#primary\").click(function () {",
-                "          swal(\""+Name+"\");",
+                "          $(this).blur();",
+                "          swal.fire(\""+Name+"\");",
                 "       });",
                 "    });",
                 "</script>",
@@ -180,14 +186,6 @@ namespace GeneratoreSit
             File.WriteAllLines(INDEX, html);
         }
 
-        public void CREATEsweetalert()
-        {
-            var p = Path.Combine(_Path, "Style");
-            if (!Directory.Exists(p))
-                Directory.CreateDirectory(p);
-
-            File.WriteAllText(Path.Combine(p, "sweetalert.css"), Resources.sweetalert);
-        }
 
         public override string ToString()
         {
@@ -247,13 +245,5 @@ namespace GeneratoreSit
             File.WriteAllLines(Path.Combine(p, "css.css"), css);
         }
 
-        public void CREATEsweetalertJS()
-        {
-            var p = Path.Combine(_Path, "Style");
-            if (!Directory.Exists(p))
-                Directory.CreateDirectory(p);
-
-            File.WriteAllText(Path.Combine(p, "sweetalert-dev.js"), Resources.sweetalert_dev);
-        }
     }
 }
