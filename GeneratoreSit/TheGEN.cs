@@ -6,244 +6,216 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeneratoreSit
-{
-    public class TheGEN
-    {
-        public static readonly string[] FONT = new string[]
-        {
-            "Georgia",
-            "Palatino Linotype",
-            "Times New Roman",
-            "Arial",
-            "Comic Sans MS",
-            "Impact",
-            "Lucida Sans Unicode",
-            "Tahoma",
-            "Trebuchet MS",
-            "Verdana",
-            "Courier New",
-            "Lucida Console"
-        };
+namespace GeneratoreSit {
+	public class TheGEN {
+		public static readonly string[] FONT = new string[]
+		{
+			"Georgia",
+			"Palatino Linotype",
+			"Times New Roman",
+			"Arial",
+			"Comic Sans MS",
+			"Impact",
+			"Lucida Sans Unicode",
+			"Tahoma",
+			"Trebuchet MS",
+			"Verdana",
+			"Courier New",
+			"Lucida Console"
+		};
 
-        private string INDEX;
-        public string _Path { private set; get; }
-        public string Name { set; get; }
-        public string Author { set; get; }
-        public TheGEN(string Nameapp, string path = null)
-        {
-            Name = Nameapp;
-            if (path == null)
-                path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+		private string INDEX;
+		public string _Path { private set; get; }
+		public string Name { set; get; }
+		public string Author { set; get; }
+		public TheGEN(string Nameapp, string path = null) {
+			Name = Nameapp;
+			if (path == null)
+				path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			if (!Directory.Exists(path))
+				Directory.CreateDirectory(path);
 
-            _Path = path;
-        }
+			_Path = path;
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="content"></param>
-        /// <param name="_column">From 1 to 6</param>
-        public void CREATEindex(string tit = null, string content = null, int _column = 1, bool btn = true)
-        {
-            int Column;
-            int PColumn;
-            if (_column <= 0 && _column > 6) _column = 1;
-            switch (_column)
-            {
-                case 2:
-                    PColumn = 3;
-                    Column = 3;
-                    break;
-                case 3:
-                    PColumn = 3;
-                    Column = 2;
-                    break;
-                case 4:
-                    PColumn = 0;
-                    Column = 3;
-                    break;
-                case 5:
-                    PColumn = 1;
-                    Column = 2;
-                    break;
-                case 6:
-                    PColumn = 0;
-                    Column = 2;
-                    break;
-                default:
-                    PColumn = 3;
-                    Column = 6;
-                    break;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="content"></param>
+		/// <param name="_column">From 1 to 4</param>
+		public void CREATEindex(string tit = null, string content = null, int _column = 1, bool btn = true) {
+			string Column, PColumn;
+			if (_column < 0 && _column > 4) _column = 1;
 
-            }
+			switch (_column) { ///il massimo è 12 per riga
+				case 1:
+					PColumn =	"col-xs-1 col-sm-1 col-md-3";
+					Column =	"col-xs-10 col-sm-10 col-md-6";
+					break;
+				case 2:
+					PColumn =	"col-sm-1 col-md-2";
+					Column =	"col-xs-6 col-sm-5 col-md-4";
+					break;
+				case 3:
+					PColumn =	"col-md-2";
+					Column =	"col-xs-4 col-sm-4 col-md-2";
+					break;
+				case 4:
+					PColumn =	"";
+					Column =	"col-xs-3 col-sm-2 col-md-3";
+					break;
+				default:
+					PColumn = string.Empty;
+					Column = string.Empty;
+					break;
+			}
 
-            string padding = "";
-            if (PColumn > 0)
-                padding = "			<div class=\"col-xs-12 col-sm-12 col-md-" + PColumn + " p-3 mb-5\"></div>";
+			string padding = "\t\t\t<div class=\"" + PColumn+"\"></div>";
 
-            if (content == null)
-                content = Resources.txt;
+			if (content == null)
+				content = Resources.txt;
 
-            if (string.IsNullOrEmpty(tit))
-                tit= Name;
+			if (string.IsNullOrEmpty(tit))
+				tit = Name;
 
-            string bBTN = "!--", eBTN = "--";
-            if (btn)
-            {
-                bBTN = "";
-                eBTN = "";
-            }
+			string bBTN = "!--", eBTN = "--";
+			if (btn) {
+				bBTN = "";
+				eBTN = "";
+			}
 
-            string szcolumn = "";
-            for (int i = 0; i < _column; i++)
-                szcolumn += "			<div class=\"col-xs-12 col-sm-12 col-md-" + Column + " text-center shadow p-3 mb-5 rounded tutto\">\n\t\t\t" + content + "\n\t\t\t</div>";
+			string szcolumn = "";
+			for (int i = 0; i < _column; i++)
+				szcolumn += "\n\t\t\t<div class=\""+Column+" text-center shadow rounded tutto\">\n\t\t\t" + content + "\n\t\t\t</div>";
 
-            string alert = "\"" + Name + "\",\"" + Author + "\"";
-            
-            var html = new string[]{
-                "<!doctype html>",
+			string alert = "\": " + Name + "\",\"" + Author + "\"";
 
-                "<html lang=\"it\">",
-                "<head>",
-                "    <meta charset=\"utf-8\">",
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
+			var html = new string[]{
+				"<!doctype html>",
 
-                "    <title>"+Name+"</title>",
-                "    <meta id=\"author\" content=\""+Author+"\">",
-                "    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" />",
-                "    <!-- script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script -->",
-                "    <script src=\"https://code.jquery.com/jquery-1.12.4.js\"></script>",
-                "    <script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>",
-                "    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>",
-                "	<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>",
-                "	<!-- Optional: include a polyfill for ES6 Promises for IE11 -->",
-                "	<script src=\"https://cdn.jsdelivr.net/npm/promise-polyfill\"></script>",
+				"<html lang=\"it\">",
+				"<head>",
+				"\t<meta charset=\"utf-8\">",
+				"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
 
-                "	<link rel=\"stylesheet\" href=\"Style/css.css\">",
+				"\t<title>"+Name+"</title>",
+				"\t<meta id=\"author\" content=\""+Author+"\">",
+				"\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" />",
+				"\t<!-- script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script -->",
+				"\t<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>",
+				"\t<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>",
+				"\t<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>",
+				"\t<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>",
+				"\t<!-- Optional: include a polyfill for ES6 Promises for IE11 -->",
+				"\t<script src=\"https://cdn.jsdelivr.net/npm/promise-polyfill\"></script>",
+				"\t<link rel=\"stylesheet\" href=\"Style/css.css\">",
 
-                "    <style>",
-                "        ",
-                "    </style>",
-                "</head>",
+				"\t<style>",
+				"\t\t ",
+				"\t</style>",
+				"</head>",
 
-                "<body>",
-                "    <div class=\"container-fluid\">",
-                "		<div class=\"row\">",
-                "		<div class=\"col-xs-12 col-sm-12 col-md-3 text-center p-3 mb-5\"></div>",
-                "			<div class=\"col-xs-12 col-sm-12 col-md-6 text-center shadow p-3 mb-5 rounded tutto\">",
-                "				<h1> <b>"+tit+"</b></h1>",
-                "				 <i>"+Author+"</i>",
-                "			</div>",
-                "		</div>",
-                "		<"+bBTN+"div class=\"row\">",
-                "                <div class=\"col-xs-12 col-sm-12 col-md-4\"></div>",
-                "                <div class=\"col-xs-12 col-sm-12 col-md-4 text-center shadow p-3 mb-5 rounded tutto\">",
-                "                    <input type=\"button\" id=primary class=\"btn btn-primary\" value=\"SUBMIT\" >",
-                "                    <input type=\"button\" id=success class=\"btn btn-success\" value=\"SUCCESS\" >",
-                "                    <input type=\"button\" id=warning class=\"btn btn-warning\" value=\"WARNING\">",
-                "                    <input type=\"button\" id=info class=\"btn btn-info\" value=\"INFO\">",
-                "                    <input type=\"button\" id=danger class=\"btn btn-danger\" value=\"DANGER\">",
-                "                </div>",
-                "		</div"+eBTN+">",
-                "		<div class=\"row\">",
-                padding,
-                szcolumn,
-                "		</div>",
-                "    </div>",
-                "</body>",
-                "</html>",
-                "<script type=\"text/javascript\">",
-                "//https://sweetalert2.github.io/",
-                "    $(document).ready(function () {",
-                "       $(\"#danger\").click(function () {",
-                "          $(this).blur();",
-                "          swal.fire(" + alert +",\"error\");",
-                "       });",
-                "       $(\"#info\").click(function () {",
-                "          $(this).blur();",
-                "          swal.fire("+ alert +",\"info\");",
-                "       });",
-                "       $(\"#warning\").click(function () {",
-                "          $(this).blur();",
-                "          swal.fire("+ alert +",\"warning\");",
-                "       });",
-                "       $(\"#success\").click(function () {",
-                "          $(this).blur();",
-                "          swal.fire("+ alert +",\"success\");",
-                "       });",
-                "       $(\"#primary\").click(function () {",
-                "          $(this).blur();",
-                "          swal.fire(\""+Name+"\");",
-                "       });",
-                "    });",
-                "</script>",
+				"<body>",
+				"\t<div class=\"container-fluid\">",
+				"\t\t<div class=\"row\">",
+				"\t\t<div class=\"col-xs-12 col-sm-12 col-md-3 text-center\"></div>",
+				"\t\t\t<div class=\"col-xs-12 col-sm-12 col-md-6 text-center shadow rounded tutto\">",
+				"\t\t\t\t<h1> <b>"+tit+"</b></h1>",
+				"\t\t\t\t<i>"+Author+"</i>",
+				"\t\t\t</div>",
+				"\t\t</div>",
+				"\t\t<"+bBTN+"div class=\"row\">",
+				"\t\t\t\t<div class=\"col-xs-1 col-sm-2 col-md-3\"></div>",
+				"\t\t\t\t<div class=\"col-xs-10 col-sm-8 col-md-6 shadow rounded tutto text-center\">",
+				"\t\t\t\t\t<!-- https://getbootstrap.com/docs/4.0/components/buttons/ -->",
+				"\t\t\t\t\t<input type=\"button\" data-type=\"primary\" id=primary class=\"bottone btn btn-primary btn-sm\" value=\"SUBMIT\" >",
+				"\t\t\t\t\t<input type=\"button\" data-type=\"success\" id=success class=\"bottone btn btn-success btn-sm\" value=\"SUCCESS\" >",
+				"\t\t\t\t\t<input type=\"button\" data-type=\"warning\" id=warning class=\"bottone btn btn-warning btn-sm\" value=\"WARNING\">",
+				"\t\t\t\t\t<input type=\"button\" data-type=\"info\" id=info class=\"bottone btn btn-info btn-sm\" value=\"INFO\">",
+				"\t\t\t\t\t<input type=\"button\" data-type=\"error\" id=danger class=\"bottone btn btn-danger btn-sm\" value=\"DANGER\">",
+				"\t\t\t\t</div>",
+				"\t\t</div"+eBTN+">",
+				"\t\t<div class=\"row\">",
+				padding+szcolumn,
+				"\t\t</div>",
+				"\t</div>",
+				"</body>",
+				"</html>",
+				"<script type=\"text/javascript\">",
+				"//https://sweetalert2.github.io/",
+				"\t$(document).ready(function () {",
+				"\t\t$(\".bottone\").click(function () {",
+				"\t\t\t$(this).blur();",
+				"\t\t\tvar tipo = $(this).data(\"type\");",
+				"\t\t\tif(tipo!=\"primary\")",
+				"\t\t\t\tswal.fire(tipo + " + alert +",tipo);",
+				"\t\t\telse",
+				"\t\t\t\tswal.fire(\"" + Name + "\",\"" + Author + "\");",
+				"\t\t});",
+				"\t});",
+				"</script>",
 
-            };
-            INDEX = Path.Combine(_Path, "index.html");
-            File.WriteAllLines(INDEX, html);
-        }
+			};
+			INDEX = Path.Combine(_Path, "index.html");
+			File.WriteAllLines(INDEX, html);
+		}
 
 
-        public override string ToString()
-        {
-            return INDEX;
-        }
+		public override string ToString() {
+			return INDEX;
+		}
 
-        public void CREATEcss(int bgR, int bgG, int bgB, double bgA, int font_val = 0)
-        {
-            if (bgB > 255) bgB = 255;
-            if (bgG > 255) bgG = 255;
-            if (bgR > 255) bgR = 255;
+		public void CREATEcss(int bgR, int bgG, int bgB, double bgA, int font_val = 0) {
+			if (bgB > 255) bgB = 255;
+			if (bgG > 255) bgG = 255;
+			if (bgR > 255) bgR = 255;
 
-            if (bgB < 0) bgB = 0;
-            if (bgG < 0) bgG = 0;
-            if (bgR < 0) bgR = 0;
+			if (bgB < 0) bgB = 0;
+			if (bgG < 0) bgG = 0;
+			if (bgR < 0) bgR = 0;
 
-            var fonts = new string[] {
-                "Georgia, serif",
-                "\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
-                "\"Times New Roman\", Times, serif",
-                "Arial, Helvetica, sans-serif",
-                "\"Comic Sans MS\", cursive, sans-serif",
-                "Impact, Charcoal, sans-serif",
-                "\"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif",
-                "Tahoma, Geneva, sans-serif",
-                "\"Trebuchet MS\", Helvetica, sans-serif",
-                "Verdana, Geneva, sans-serif",
-                "\"Courier New\", Courier, monospace",
-                "\"Lucida Console\", Monaco, monospace"
-            };
+			var fonts = new string[] {
+				"Georgia, serif",
+				"\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
+				"\"Times New Roman\", Times, serif",
+				"Arial, Helvetica, sans-serif",
+				"\"Comic Sans MS\", cursive, sans-serif",
+				"Impact, Charcoal, sans-serif",
+				"\"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif",
+				"Tahoma, Geneva, sans-serif",
+				"\"Trebuchet MS\", Helvetica, sans-serif",
+				"Verdana, Geneva, sans-serif",
+				"\"Courier New\", Courier, monospace",
+				"\"Lucida Console\", Monaco, monospace"
+			};
 
-            if ((font_val < 0) && font_val > fonts.Length)
-                font_val = 0;
+			if ((font_val < 0) && font_val > fonts.Length)
+				font_val = 0;
 
-            var css = new string[]{
-                "body {",
-                "	background-color: rgba("+bgR+", "+bgG+", "+bgB+", "+bgA+");",
-                "	font-family: "+fonts[font_val]+";",
-                "	}",
-                "",
-                ".tutto {",
-                "	background-color: rgba(255, 255, 255, 0.5);",
-                "	border: 1px solid;",
-                "	padding: 10px;",
-                "	box-shadow: 5px 10px 8px #888888;",
-                "	vertical-align: middle;",
-                "}",
-                "",
-                ".row {",
-                "	padding-top: 10px;",
-                "}"
-            };
-            var p = Path.Combine(_Path, "Style");
-            if (!Directory.Exists(p))
-                Directory.CreateDirectory(p);
+			var css = new string[]{
+				"body {",
+				"\tbackground-color: rgba("+bgR+", "+bgG+", "+bgB+", "+bgA+");",
+				"\tfont-family: "+fonts[font_val]+";",
+				"\t}",
+				"",
+				".tutto {",
+				"\tbackground-color: rgba(255, 255, 255, 0.5);",
+				"\tborder: 1px solid;",
+				"\tpadding: 10px;",
+				"\tbox-shadow: 5px 10px 8px #888888;",
+				"\tvertical-align: middle;",
+				"}",
+				"",
+				".row {",
+				"\tpadding-top: 10px;",
+				"}"
+			};
+			var p = Path.Combine(_Path, "Style");
+			if (!Directory.Exists(p))
+				Directory.CreateDirectory(p);
 
-            File.WriteAllLines(Path.Combine(p, "css.css"), css);
-        }
+			File.WriteAllLines(Path.Combine(p, "css.css"), css);
+		}
 
-    }
+	}
 }
