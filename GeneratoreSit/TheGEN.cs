@@ -49,20 +49,20 @@ namespace GeneratoreSit {
 
 			switch (_column) { ///il massimo è 12 per riga
 				case 1:
-					PColumn =	"col-xs-1 col-sm-1 col-md-3";
-					Column =	"col-xs-10 col-sm-10 col-md-6";
+					PColumn = "col-xs-1 col-sm-1 col-md-3";
+					Column = "col-xs-10 col-sm-10 col-md-6";
 					break;
 				case 2:
-					PColumn =	"col-sm-1 col-md-2";
-					Column =	"col-xs-6 col-sm-5 col-md-4";
+					PColumn = "col-sm-1 col-md-2";
+					Column = "col-xs-6 col-sm-5 col-md-4";
 					break;
 				case 3:
-					PColumn =	"col-md-2";
-					Column =	"col-xs-4 col-sm-4 col-md-2";
+					PColumn = "col-md-2";
+					Column = "col-xs-4 col-sm-4 col-md-2";
 					break;
 				case 4:
-					PColumn =	"";
-					Column =	"col-xs-3 col-sm-2 col-md-3";
+					PColumn = "";
+					Column = "col-xs-3 col-sm-2 col-md-3";
 					break;
 				default:
 					PColumn = string.Empty;
@@ -70,7 +70,7 @@ namespace GeneratoreSit {
 					break;
 			}
 
-			string padding = "\t\t\t<div class=\"" + PColumn+"\"></div>";
+			string padding = "\t\t\t<div class=\"" + PColumn + "\"></div>";
 
 			if (content == null)
 				content = Resources.txt;
@@ -86,9 +86,7 @@ namespace GeneratoreSit {
 
 			string szcolumn = "";
 			for (int i = 0; i < _column; i++)
-				szcolumn += "\n\t\t\t<div class=\""+Column+" text-center shadow rounded tutto\">\n\t\t\t" + content + "\n\t\t\t</div>";
-
-			string alert = "\": " + Name + "\",\"" + Author + "\"";
+				szcolumn += "\n\t\t\t<div class=\"" + Column + " text-center shadow rounded tutto\">\n\t\t\t" + content + "\n\t\t\t</div>";
 
 			var html = new string[]{
 				"<!doctype html>",
@@ -121,18 +119,23 @@ namespace GeneratoreSit {
 				"\t\t<div class=\"col-xs-12 col-sm-12 col-md-3 text-center\"></div>",
 				"\t\t\t<div class=\"col-xs-12 col-sm-12 col-md-6 text-center shadow rounded tutto\">",
 				"\t\t\t\t<h1> <b>"+tit+"</b></h1>",
-				"\t\t\t\t<i>"+Author+"</i>",
+				"\t\t\t\t<i>Performed by "+Author+"</i>",
 				"\t\t\t</div>",
 				"\t\t</div>",
 				"\t\t<"+bBTN+"div class=\"row\">",
 				"\t\t\t\t<div class=\"col-xs-1 col-sm-2 col-md-3\"></div>",
 				"\t\t\t\t<div class=\"col-xs-10 col-sm-8 col-md-6 shadow rounded tutto text-center\">",
 				"\t\t\t\t\t<!-- https://getbootstrap.com/docs/4.0/components/buttons/ -->",
-				"\t\t\t\t\t<input type=\"button\" data-type=\"primary\" id=primary class=\"bottone btn btn-primary btn-sm\" value=\"SUBMIT\" >",
 				"\t\t\t\t\t<input type=\"button\" data-type=\"success\" id=success class=\"bottone btn btn-success btn-sm\" value=\"SUCCESS\" >",
 				"\t\t\t\t\t<input type=\"button\" data-type=\"warning\" id=warning class=\"bottone btn btn-warning btn-sm\" value=\"WARNING\">",
 				"\t\t\t\t\t<input type=\"button\" data-type=\"info\" id=info class=\"bottone btn btn-info btn-sm\" value=\"INFO\">",
 				"\t\t\t\t\t<input type=\"button\" data-type=\"error\" id=danger class=\"bottone btn btn-danger btn-sm\" value=\"DANGER\">",
+				"\t\t\t\t\t<hr>",
+				"\t\t\t\t\t<input type=\"button\" id=primary class=\"bottone btn btn-primary btn-sm\" value=\"SUBMIT\" >",
+				"\t\t\t\t\t<input type=\"button\" id=secondary class=\"bottone btn btn-secondary btn-sm\" value=\"SECONDARY\">",
+				"\t\t\t\t\t<input type=\"button\" id=dark class=\"bottone btn btn-dark btn-sm\" value=\"DARK\">",
+				"\t\t\t\t\t<input type=\"button\" id=light class=\"bottone btn btn-light btn-sm\" value=\"LIGHT\">",
+				"\t\t\t\t\t<input type=\"button\" id=link class=\"bottone btn btn-link btn-sm\" value=\"LINK\">",
 				"\t\t\t\t</div>",
 				"\t\t</div"+eBTN+">",
 				"\t\t<div class=\"row\">",
@@ -146,11 +149,12 @@ namespace GeneratoreSit {
 				"\t$(document).ready(function () {",
 				"\t\t$(\".bottone\").click(function () {",
 				"\t\t\t$(this).blur();",
+				"\t\t\tvar val = $(this).val()",
 				"\t\t\tvar tipo = $(this).data(\"type\");",
-				"\t\t\tif(tipo!=\"primary\")",
-				"\t\t\t\tswal.fire(tipo + " + alert +",tipo);",
+				"\t\t\tif(tipo&& tipo!=\"\")",
+				"\t\t\t\tswal.fire(tipo + \"" + Name + "\",val,tipo);",
 				"\t\t\telse",
-				"\t\t\t\tswal.fire(\"" + Name + "\",\"" + Author + "\");",
+				"\t\t\t\tswal.fire(\"" + Name + " di" + Author + "\",val);",
 				"\t\t});",
 				"\t});",
 				"</script>",
@@ -174,6 +178,11 @@ namespace GeneratoreSit {
 			if (bgG < 0) bgG = 0;
 			if (bgR < 0) bgR = 0;
 
+
+			string coloretesto = "Black";
+			if (bgB <= 100 || bgG <= 100 || bgR <= 100)
+				coloretesto = "White";
+
 			var fonts = new string[] {
 				"Georgia, serif",
 				"\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
@@ -196,6 +205,7 @@ namespace GeneratoreSit {
 				"body {",
 				"\tbackground-color: rgba("+bgR+", "+bgG+", "+bgB+", "+bgA+");",
 				"\tfont-family: "+fonts[font_val]+";",
+				"\tcolor: "+coloretesto+";",
 				"\t}",
 				"",
 				".tutto {",
