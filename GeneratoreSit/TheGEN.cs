@@ -88,7 +88,8 @@ namespace GeneratoreSit {
 			for (int i = 0; i < _column; i++)
 				szcolumn += "\n\t\t\t<div class=\"" + Column + " text-center shadow rounded tutto\">\n\t\t\t" + content + "\n\t\t\t</div>";
 
-			var html = new string[]{
+			var html = new List<string>();
+			html.AddRange(new string[]{
 				"<!doctype html>",
 
 				"<html lang=\"it\">",
@@ -122,6 +123,9 @@ namespace GeneratoreSit {
 				"\t\t\t\t<i>Performed by "+Author+"</i>",
 				"\t\t\t</div>",
 				"\t\t</div>",
+			});
+			if (btn)
+				html.AddRange(new string[]{
 				"\t\t<"+bBTN+"div class=\"row\">",
 				"\t\t\t\t<div class=\"col-xs-1 col-sm-2 col-md-3\"></div>",
 				"\t\t\t\t<div class=\"col-xs-10 col-sm-8 col-md-6 shadow rounded tutto text-center\">",
@@ -130,7 +134,7 @@ namespace GeneratoreSit {
 				"\t\t\t\t\t<input type=\"button\" data-type=\"warning\" id=warning class=\"bottone btn btn-warning btn-sm\" value=\"WARNING\">",
 				"\t\t\t\t\t<input type=\"button\" data-type=\"info\" id=info class=\"bottone btn btn-info btn-sm\" value=\"INFO\">",
 				"\t\t\t\t\t<input type=\"button\" data-type=\"error\" id=danger class=\"bottone btn btn-danger btn-sm\" value=\"DANGER\">",
-				"\t\t\t\t\t<hr>",
+				"\t\t\t\t\t<br>",
 				"\t\t\t\t\t<input type=\"button\" id=primary class=\"bottone btn btn-primary btn-sm\" value=\"SUBMIT\" >",
 				"\t\t\t\t\t<input type=\"button\" id=secondary class=\"bottone btn btn-secondary btn-sm\" value=\"SECONDARY\">",
 				"\t\t\t\t\t<input type=\"button\" id=dark class=\"bottone btn btn-dark btn-sm\" value=\"DARK\">",
@@ -138,8 +142,10 @@ namespace GeneratoreSit {
 				"\t\t\t\t\t<input type=\"button\" id=link class=\"bottone btn btn-link btn-sm\" value=\"LINK\">",
 				"\t\t\t\t</div>",
 				"\t\t</div"+eBTN+">",
-				"\t\t<div class=\"row\">",
-				padding+szcolumn,
+			});
+			html.AddRange(new string[]{
+			"\t\t<div class=\"row\">",
+				padding + szcolumn,
 				"\t\t</div>",
 				"\t</div>",
 				"</body>",
@@ -159,9 +165,9 @@ namespace GeneratoreSit {
 				"\t});",
 				"</script>",
 
-			};
+			});
 			INDEX = Path.Combine(_Path, "index.html");
-			File.WriteAllLines(INDEX, html);
+			File.WriteAllLines(INDEX, html.ToArray());
 		}
 
 
@@ -214,6 +220,10 @@ namespace GeneratoreSit {
 				"\tpadding: 10px;",
 				"\tbox-shadow: 5px 10px 8px #888888;",
 				"\tvertical-align: middle;",
+				"}",
+				".bottone {",
+				"\tmargin-bottom: 4px;",
+				"\tmargin-top: 4px;",
 				"}",
 				"",
 				".row {",
