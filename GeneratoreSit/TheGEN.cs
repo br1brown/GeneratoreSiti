@@ -43,7 +43,7 @@ namespace GeneratoreSit {
 		/// </summary>
 		/// <param name="content"></param>
 		/// <param name="_column">From 1 to 4</param>
-		public void CREATEindex(string tit = null, string content = null, int _column = 1, bool btn = true) {
+		public void CREATEindex(bool menu, string tit = null, string content = null, int _column = 1, bool btn = true) {
 			string Column, PColumn;
 			if (_column < 0 && _column > 4) _column = 1;
 
@@ -93,39 +93,124 @@ namespace GeneratoreSit {
 				"<!doctype html>",
 
 				"<html lang=\"it\">",
+			});
+			if (menu)
+				html.AddRange(new string[]{
+
+				"<?php",
+				"$page = \"home\";",
+				"if (isset($_GET[\"page\"])) {",
+				"    $page = $_GET[\"page\"]; ",
+				"}",
+				"?>",
+
+				});
+
+			html.AddRange(new string[]{
 				"<head>",
 				"\t<meta charset=\"utf-8\">",
 				"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
 
 				"\t<title>"+Name+"</title>",
 				"\t<meta id=\"author\" content=\""+Author+"\">",
-				"\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" />",
-				"\t<!-- script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script -->",
+
+				"\t<!-- ROBE PER IL MENU -->",
+				"\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">",
+				"\t<!-- jquery -->",
 				"\t<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>",
 				"\t<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>",
+
+				"\t<!-- bootstrap -->",
 				"\t<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>",
+				"\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" />",
+				"\t<!-- GLI ALERT -->",
 				"\t<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>",
 				"\t<!-- Optional: include a polyfill for ES6 Promises for IE11 -->",
 				"\t<script src=\"https://cdn.jsdelivr.net/npm/promise-polyfill\"></script>",
-				"\t<link rel=\"stylesheet\" href=\"Style/css.css\">",
+
+				"\t<!-- ROBA NOSTRA -->",
+				"\t<link rel=\"stylesheet\" href=\"style/css.css\">",
+				"\t<script src=\"js/js.js\"></script",
 
 				"\t<style>",
 				"\t\t ",
 				"\t</style>",
 				"</head>",
-
 				"<body>",
-				"\t<div class=\"container-fluid\">",
+				"\t<div class=\"container-fluid\">"
+			});
+			string funzione = "SetBottoni();";
+			if (menu)
+				funzione += "\n\t\tSetMenu();";
+			if (!menu)
+				html.AddRange(homes(tit, btn, bBTN, eBTN, padding, szcolumn));
+			else {
+				html.AddRange(new string[] {
+					"<?php",
+					"// se non va https://jsonformatter.curiousconcept.com/",
+					"$menuArray = json_decode(file_get_contents(\"menu.json\"), true);",
+					"",
+					"if (count($menuArray) > 1) { ?>",
+					"<div class=\"topnav\" id=\"ilmenu\">",
+					"<?php foreach ($menuArray as $key => $value):",
+					"echo \"		 <a href=# data-role=\" . $value['id'] . \" class=itemenu\";",
+					"if ($page == $value['id']) {",
+					"echo \" id=inizio\";",
+					"}",
+					"echo \">\" . $value['title'] . \"</a>\n\";",
+					"endforeach; ?>",
+					"<a class=\"icon\" id=\"_3punti\">",
+					"<i class=\"fa fa-bars\"></i>",
+					"</a>",
+					"</div>",
+					"<?php } else {foreach ($menuArray as $key => $value):",
+					"   echo \"<a href=# data-role=\" .",
+					"	   $value['id'] .",
+					"	   \" class=itemenu id=inizio></a>\n\";",
+					"endforeach;}",
+					"foreach ($menuArray as $key => $value):",
+					"echo \"\n\n<div class=menupart id=\" . $value['id'] . \">\n\";",
+					"require $value['link'];",
+					"echo \"\n</div>\";",
+					"endforeach; ?>",
+				});
+
+				File.WriteAllBytes(Path.Combine(_Path, "menu.json"), Resources.menu);
+				File.WriteAllLines(Path.Combine(_Path, "home.html"), homes(tit, btn, bBTN, eBTN, padding, szcolumn));
+
+			}
+			html.AddRange(new string[]{
+			"\t</div>",
+			"</body>",
+			"</html>",
+			"<script type=\"text/javascript\">",
+			"\t$(document).ready(function () {",
+			"\t\t"+ funzione,
+			"\t});",
+			"</script>",
+
+			});
+			if (menu)
+				INDEX = Path.Combine(_Path, "index.php");
+			else
+				INDEX = Path.Combine(_Path, "index.html");
+			File.WriteAllLines(INDEX, html.ToArray());
+
+		}
+
+		private List<string> homes(string tit, bool btn, string bBTN, string eBTN, string padding, string szcolumn) {
+			var homes = new List<string>();
+			homes.AddRange(new string[]{
 				"\t\t<div class=\"row\">",
 				"\t\t<div class=\"col-xs-12 col-sm-12 col-md-3 text-center\"></div>",
 				"\t\t\t<div class=\"col-xs-12 col-sm-12 col-md-6 text-center shadow rounded tutto\">",
-				"\t\t\t\t<h1> <b>"+tit+"</b></h1>",
-				"\t\t\t\t<i>Performed by "+Author+"</i>",
+				"\t\t\t\t<h1> <b>" + tit + "</b></h1>",
+				"\t\t\t\t<i>Performed by " + Author + "</i>",
 				"\t\t\t</div>",
-				"\t\t</div>",
+				"\t\t</div>"
 			});
 			if (btn)
-				html.AddRange(new string[]{
+				homes.AddRange(new string[]{
 				"\t\t<"+bBTN+"div class=\"row\">",
 				"\t\t\t\t<div class=\"col-xs-1 col-sm-2 col-md-3\"></div>",
 				"\t\t\t\t<div class=\"col-xs-10 col-sm-8 col-md-6 shadow rounded tutto text-center\">",
@@ -143,31 +228,13 @@ namespace GeneratoreSit {
 				"\t\t\t\t</div>",
 				"\t\t</div"+eBTN+">",
 			});
-			html.AddRange(new string[]{
+			homes.AddRange(new string[]{
 			"\t\t<div class=\"row\">",
 				padding + szcolumn,
-				"\t\t</div>",
-				"\t</div>",
-				"</body>",
-				"</html>",
-				"<script type=\"text/javascript\">",
-				"//https://sweetalert2.github.io/",
-				"\t$(document).ready(function () {",
-				"\t\t$(\".bottone\").click(function () {",
-				"\t\t\t$(this).blur();",
-				"\t\t\tvar val = $(this).val()",
-				"\t\t\tvar tipo = $(this).data(\"type\");",
-				"\t\t\tif(tipo&& tipo!=\"\")",
-				"\t\t\t\tswal.fire(tipo + \"" + Name + "\",val,tipo);",
-				"\t\t\telse",
-				"\t\t\t\tswal.fire(\"" + Name + " di" + Author + "\",val);",
-				"\t\t});",
-				"\t});",
-				"</script>",
+				"\t\t</div>"
+				});
 
-			});
-			INDEX = Path.Combine(_Path, "index.html");
-			File.WriteAllLines(INDEX, html.ToArray());
+			return homes;
 		}
 
 
@@ -175,7 +242,7 @@ namespace GeneratoreSit {
 			return INDEX;
 		}
 
-		public void CREATEcss(int bgR, int bgG, int bgB, double bgA, int font_val = 0) {
+		public void CREATEcss(bool menu, int bgR, int bgG, int bgB, double bgA, int font_val = 0) {
 			if (bgB > 255) bgB = 255;
 			if (bgG > 255) bgG = 255;
 			if (bgR > 255) bgR = 255;
@@ -214,28 +281,66 @@ namespace GeneratoreSit {
 				"\tcolor: "+coloretesto+";",
 				"\t}",
 				"",
-				".tutto {",
-				"\tbackground-color: rgba(255, 255, 255, 0.5);",
-				"\tborder: 1px solid;",
-				"\tpadding: 10px;",
-				"\tbox-shadow: 5px 10px 8px #888888;",
-				"\tvertical-align: middle;",
-				"}",
-				".bottone {",
-				"\tmargin-bottom: 4px;",
-				"\tmargin-top: 4px;",
-				"}",
-				"",
-				".row {",
-				"\tpadding-top: 10px;",
-				"}"
 			};
-			var p = Path.Combine(_Path, "Style");
+
+
+			var p = Path.Combine(_Path, "style");
 			if (!Directory.Exists(p))
 				Directory.CreateDirectory(p);
 
-			File.WriteAllLines(Path.Combine(p, "css.css"), css);
+			var pppat = Path.Combine(p, "css.css");
+			File.WriteAllLines(pppat, css);
+			File.AppendAllText(pppat, Resources.css);
 		}
 
+		public void CREATEjs(bool menu) {
+
+			var js = new List<string>();
+			js.AddRange(new string[]{
+			"//https://sweetalert2.github.io/",
+			"function SetBottoni() {",
+			"\t$(\".bottone\").click(function() {",
+				"\t\t$(this).blur();",
+				"\t\tvar val = $(this).val()",
+				"\t\tvar tipo = $(this).data(\"type\");",
+				"\t\tif(tipo&& tipo!=\"\")",
+				"\t\t\tswal.fire(tipo + \"" + Name + "\",val,tipo);",
+				"\t\telse",
+				"\t\t\tswal.fire(\"" + Name + " di " + Author + "\",val);",
+				"\t});\n",
+				"}\n\n",
+			});
+			if (menu) {
+				js.AddRange(new string[] {
+
+					"\t\tfunction SetMenu() {",
+					"\t$(\".itemenu\").click(function() {",
+					"\t\t$(\".menupart\").hide();",
+					"\t\t$(\".itemenu\").removeClass(\"active\");",
+					"\t\t$(this).addClass(\"active\");",
+					"\t\tvar iddestinazione = ($(this).data(\"role\"));",
+					"\t\tif(iddestinazione != \"#\") {",
+					"\t\t\t$(\"#\" + iddestinazione).fadeIn();",
+					"\t\t}",
+					"\t});",
+					"\t",
+					"\t$(\"#_3punti\").click(function() {",
+					"\t\t$(this).blur();",
+					"\t\tif($(\"#ilmenu\").attr('class') === \"topnav\") $(\"#ilmenu\").addClass(\"responsive\");",
+					"\t\telse $(\"#ilmenu\").removeClass(\"responsive\");",
+					"\t});",
+					"",
+					"$(\"#inizio\").trigger(\"click\");",
+					"}",
+
+				});
+			}
+			var p = Path.Combine(_Path, "js");
+			if (!Directory.Exists(p))
+				Directory.CreateDirectory(p);
+
+			File.WriteAllLines(Path.Combine(p, "js.js"), js);
+
+		}
 	}
 }

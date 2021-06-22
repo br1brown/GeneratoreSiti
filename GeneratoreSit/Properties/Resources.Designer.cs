@@ -61,6 +61,51 @@ namespace GeneratoreSit.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a 
+        ///.tutto {
+        ///	background-color: rgba(255, 255, 255, 0.3);
+        ///	border: 1px solid;
+        ///	padding: 10px;
+        ///	box-shadow: 5px 10px 8px #888888;
+        ///	vertical-align: middle;
+        ///}
+        ///.bottone {
+        ///	margin-bottom: 4px;
+        ///	margin-top: 4px;
+        ///}
+        ///
+        ///.row {
+        ///	padding-top: 10px;
+        ///}
+        ///
+        ///.muovi:hover {
+        ///  /* Start the shake animation and make the animation last for 0.5 seconds */
+        ///  animation: shake 0.5s;
+        ///
+        ///  /* When the animation is finished, start again */
+        ///  animation-iteration-count: infinite;
+        ///}
+        ///
+        ///@keyframes shake {
+        ///  0% { transform:  [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string css {
+            get {
+                return ResourceManager.GetString("css", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] menu {
+            get {
+                object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac sapien non lectus faucibus auctor. Donec sollicitudin eget justo ac eleifend. Nulla semper mauris sem, ut hendrerit diam finibus at. Etiam tempor justo scelerisque, convallis lorem eu, tincidunt arcu. Vivamus vel maximus nisi. Proin neque augue, convallis eu accumsan a, molestie ac ex. Mauris suscipit porttitor ultricies. Praesent efficitur magna et nisi lobortis, quis mollis ipsum mattis. Suspendisse vitae risus tortor. Donec eu quam nibh. Cra [stringa troncata]&quot;;.
         /// </summary>
         internal static string txt {
