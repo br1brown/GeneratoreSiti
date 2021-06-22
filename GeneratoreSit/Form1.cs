@@ -114,6 +114,9 @@ namespace GeneratoreSit {
 			backgroundWorker1.ReportProgress(0);
 			if (!menu)
 				Process.Start(g.ToString());
+				else
+				Process.Start(g.Folder());
+
 		}
 
 		private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) {

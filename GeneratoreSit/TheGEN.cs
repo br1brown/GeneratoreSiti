@@ -242,6 +242,9 @@ namespace GeneratoreSit {
 		public override string ToString() {
 			return INDEX;
 		}
+		public string Folder() {
+			return _Path;
+		}
 
 		public void CREATEcss(bool menu, int bgR, int bgG, int bgB, double bgA, int font_val = 0) {
 			if (bgB > 255) bgB = 255;
