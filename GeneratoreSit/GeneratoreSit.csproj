@@ -116,6 +116,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\about.html" />
     <Content Include="Resources\css.txt" />
     <Content Include="Senzanome.ico" />
   </ItemGroup>

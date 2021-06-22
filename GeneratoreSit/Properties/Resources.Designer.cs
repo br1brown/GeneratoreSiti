@@ -61,6 +61,36 @@ namespace GeneratoreSit.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a 		&lt;div class=&quot;row&quot;&gt;
+        ///		&lt;div class=&quot;col-xs-12 col-sm-12 col-md-3 text-center&quot;&gt;&lt;/div&gt;
+        ///			&lt;div class=&quot;col-xs-12 col-sm-12 col-md-6 text-center shadow rounded tutto&quot;&gt;
+        ///				&lt;h1&gt;&lt;b&gt;About&lt;/b&gt;&lt;/h1&gt;
+        ///			&lt;/div&gt;
+        ///		&lt;/div&gt;
+        ///		&lt;style&gt;
+        ///		.social-menu {
+        ///			display: flex;
+        ///			list-style-type: none;
+        ///		}
+        ///		 
+        ///		.social-menu i {
+        ///			color: #fff;
+        ///			width: 40px;
+        ///			height: 40px;
+        ///			border-radius: 50%;
+        ///			font-size: 25px;
+        ///			margin-right: 10px;
+        ///			transition: all 0.2s ease-in-out;
+        ///			display: flex;
+        ///			justify-conte [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string about {
+            get {
+                return ResourceManager.GetString("about", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a 
         ///.tutto {
         ///	background-color: rgba(255, 255, 255, 0.3);

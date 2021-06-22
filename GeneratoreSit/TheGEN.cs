@@ -114,8 +114,8 @@ namespace GeneratoreSit {
 				"\t<title>"+Name+"</title>",
 				"\t<meta id=\"author\" content=\""+Author+"\">",
 
-				"\t<!-- ROBE PER IL MENU -->",
-				"\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">",
+				"\t<!-- ROBE PER IL MENU + SOCIAL -->",
+				"\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\">",
 				"\t<!-- jquery -->",
 				"\t<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>",
 				"\t<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>",
@@ -176,6 +176,7 @@ namespace GeneratoreSit {
 				});
 
 				File.WriteAllBytes(Path.Combine(_Path, "menu.json"), Resources.menu);
+				File.WriteAllText(Path.Combine(_Path, "about.html"), Resources.about);
 				File.WriteAllLines(Path.Combine(_Path, "home.html"), homes(tit, btn, bBTN, eBTN, padding, szcolumn));
 
 			}
@@ -313,7 +314,7 @@ namespace GeneratoreSit {
 			if (menu) {
 				js.AddRange(new string[] {
 
-					"\t\tfunction SetMenu() {",
+					"function SetMenu() {",
 					"\t$(\".itemenu\").click(function() {",
 					"\t\t$(\".menupart\").hide();",
 					"\t\t$(\".itemenu\").removeClass(\"active\");",
@@ -322,6 +323,7 @@ namespace GeneratoreSit {
 					"\t\tif(iddestinazione != \"#\") {",
 					"\t\t\t$(\"#\" + iddestinazione).fadeIn();",
 					"\t\t}",
+					"\t\t$(\"#_3punti\").trigger(\"click\"); ",
 					"\t});",
 					"\t",
 					"\t$(\"#_3punti\").click(function() {",
