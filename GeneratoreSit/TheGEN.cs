@@ -142,9 +142,10 @@ namespace GeneratoreSit {
 			string funzione = "SetBottoni();";
 			if (menu)
 				funzione += "\n\t\tSetMenu();";
-			if (!menu)
+			if (!menu) {
 				html.AddRange(homes(tit, btn, bBTN, eBTN, padding, szcolumn));
-			else {
+				html.Add(Resources.about);
+			} else {
 				html.AddRange(new string[] {
 					"<?php",
 					"// se non va https://jsonformatter.curiousconcept.com/",
@@ -174,9 +175,22 @@ namespace GeneratoreSit {
 					"echo \"\n</div>\";",
 					"endforeach; ?>",
 				});
-
 				File.WriteAllBytes(Path.Combine(_Path, "menu.json"), Resources.menu);
-				File.WriteAllText(Path.Combine(_Path, "about.html"), Resources.about);
+				var about = new List<string>();
+				about.AddRange(new string[] {
+				"		<div class=\"row\">",
+				"		<div class=\"col-xs-12 col-sm-12 col-md-3 text-center\"></div>",
+				"			<div class=\"col-xs-12 col-sm-12 col-md-6 text-center shadow rounded tutto\">",
+				"				<h1><b>About</b></h1>",
+				"			</div>",
+				"		</div>"
+				});
+				about.Add(Resources.about);
+				File.WriteAllLines(Path.Combine(_Path, "about.html"), about);
+				
+				
+				
+				
 				File.WriteAllLines(Path.Combine(_Path, "home.html"), homes(tit, btn, bBTN, eBTN, padding, szcolumn));
 
 			}

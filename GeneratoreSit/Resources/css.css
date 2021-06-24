@@ -10,7 +10,11 @@
 	margin-bottom: 4px;
 	margin-top: 4px;
 }
-
+.bordo {
+	border: 1px solid;
+	padding: 10px;
+	box-shadow: 5px 5px 4px #888888;
+}
 .row {
 	padding-top: 10px;
 }
@@ -97,4 +101,103 @@
     display: block;
     text-align: left;
   }
+}
+
+/*social*/
+.social-menu {
+	display: flex;
+	list-style-type: none;
+	align-items: center;
+}
+		 
+.social-menu i {
+	color: #fff;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	font-size: 30px;
+	margin: 5px;
+	transition: all 0.2s ease-in-out;
+	display: flex;
+	justify-content: center;
+}
+.social-menu i:before {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	font-weight: 300;
+}
+				
+.social-menu i:hover {
+	opacity: .7;
+	border-radius: 0;
+}
+		
+.social-menu a {
+	text-decoration: none;
+}	
+
+.fa-facebook {
+  background: #3B5998;
+}
+.fa-telegram {
+  background: #2ca5e0;
+}
+.fa-whatsapp {
+  background: #25d366;
+}
+.fa-twitter {
+  background: #55ACEE;
+}
+.fa-google {
+  background: black;
+}
+.fa-linkedin {
+  background: #007bb5;
+}
+.fa-youtube {
+  background: #bb0000;
+}
+.fa-instagram {
+  background: #125688;
+}
+.fa-pinterest {
+  background: #cb2027;
+}
+.fa-snapchat-ghost {
+  background: #fffc00;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.fa-skype {
+  background: #00aff0;
+}
+.fa-android {
+  background: #a4c639;
+}
+.fa-dribbble {
+  background: #ea4c89;
+}
+.fa-vimeo {
+  background: #45bbff;
+}
+.fa-tumblr {
+  background: #2c4762;
+}
+.fa-foursquare {
+  background: #45bbff;
+}
+.fa-stumbleupon {
+  background: #eb4924;
+}
+.fa-flickr {
+  background: #f40083;
+}
+.fa-yahoo {
+  background: #430297;
+}
+.fa-soundcloud {
+  background: #ff5500;
+}
+.fa-reddit {
+  background: #ff5700;
 }

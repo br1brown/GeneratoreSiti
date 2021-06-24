@@ -61,28 +61,16 @@ namespace GeneratoreSit.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a 		&lt;div class=&quot;row&quot;&gt;
-        ///		&lt;div class=&quot;col-xs-12 col-sm-12 col-md-3 text-center&quot;&gt;&lt;/div&gt;
-        ///			&lt;div class=&quot;col-xs-12 col-sm-12 col-md-6 text-center shadow rounded tutto&quot;&gt;
-        ///				&lt;h1&gt;&lt;b&gt;About&lt;/b&gt;&lt;/h1&gt;
-        ///			&lt;/div&gt;
-        ///		&lt;/div&gt;
-        ///		&lt;style&gt;
-        ///		.social-menu {
-        ///			display: flex;
-        ///			list-style-type: none;
-        ///		}
-        ///		 
-        ///		.social-menu i {
-        ///			color: #fff;
-        ///			width: 40px;
-        ///			height: 40px;
-        ///			border-radius: 50%;
-        ///			font-size: 25px;
-        ///			margin-right: 10px;
-        ///			transition: all 0.2s ease-in-out;
-        ///			display: flex;
-        ///			justify-conte [stringa troncata]&quot;;.
+        ///   Cerca una stringa localizzata simile a &lt;div class=&quot;row&quot;&gt;
+        ///	&lt;div class=&quot;col-xs-1 col-sm-1 col-md-3&quot;&gt;&lt;/div&gt;
+        ///	&lt;div class=&quot;col-xs-10 col-sm-10 col-md-6 shadow rounded tutto&quot;&gt;
+        ///		&lt;div class=&quot;bordo rounded&quot;&gt;
+        ///			&lt;strong&gt;Chat&lt;/strong&gt;
+        ///			&lt;ul class=social-menu&gt;
+        ///				&lt;li&gt;&lt;a href=&quot;http://www.telegram.org/&quot; target=_blank&gt;&lt;i class=&quot;fab fa-telegram &quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        ///				&lt;li&gt;&lt;a href=&quot;http://www.whatsapp.com&quot; target=_blank&gt;&lt;i class=&quot;fab fa-whatsapp &quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        ///				&lt;li&gt;&lt;a href=&quot;http://www.skype.com&quot; target=_blank&gt;&lt;i class=&quot;fab fa-skype &quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        ///		 [stringa troncata]&quot;;.
         /// </summary>
         internal static string about {
             get {
@@ -103,7 +91,9 @@ namespace GeneratoreSit.Properties {
         ///	margin-bottom: 4px;
         ///	margin-top: 4px;
         ///}
-        ///
+        ///.bordo{
+        ///	border: 1px solid;
+        ///}
         ///.row {
         ///	padding-top: 10px;
         ///}
@@ -116,8 +106,7 @@ namespace GeneratoreSit.Properties {
         ///  animation-iteration-count: infinite;
         ///}
         ///
-        ///@keyframes shake {
-        ///  0% { transform:  [stringa troncata]&quot;;.
+        ///@keyfra [stringa troncata]&quot;;.
         /// </summary>
         internal static string css {
             get {

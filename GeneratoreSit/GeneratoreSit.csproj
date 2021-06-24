@@ -117,7 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\about.html" />
-    <Content Include="Resources\css.txt" />
+    <Content Include="Resources\css.css" />
     <Content Include="Senzanome.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
